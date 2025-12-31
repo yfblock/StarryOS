@@ -545,7 +545,6 @@ dependencies = [
 [[package]]
 name = "axplat"
 version = "0.3.0"
-source = "git+https://github.com/arceos-org/axplat_crates.git?tag=dev-v03#72b148262f4f58a3a6c64c23d0f377e6469b662a"
 dependencies = [
  "axplat-macros",
  "bitflags 2.10.0",
@@ -609,7 +608,6 @@ dependencies = [
 [[package]]
 name = "axplat-macros"
 version = "0.1.0"
-source = "git+https://github.com/arceos-org/axplat_crates.git?tag=dev-v03#72b148262f4f58a3a6c64c23d0f377e6469b662a"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -655,7 +653,6 @@ dependencies = [
 [[package]]
 name = "axplat-x86-pc"
 version = "0.3.0"
-source = "git+https://github.com/arceos-org/axplat_crates.git?tag=dev-v03#72b148262f4f58a3a6c64c23d0f377e6469b662a"
 dependencies = [
  "axconfig-macros",
  "axcpu",
@@ -2144,6 +2141,7 @@ dependencies = [
  "lazy_static",
  "linkme",
  "linux-raw-sys",
+ "log",
  "memory_addr",
  "num_enum",
  "rand",

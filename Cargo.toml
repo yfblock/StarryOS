@@ -146,3 +146,8 @@ optional = true
 [package.metadata.vendor-filter]
 platforms = ["riscv64gc-unknown-none-elf", "loongarch64-unknown-none-softfloat"]
 all-features = true
+
+[patch."https://github.com/arceos-org/axplat_crates"]
+axplat = { path = "/home/yfblock/Code/axplat_crates/axplat/" }
+axplat-x86-pc = { path = "/home/yfblock/Code/axplat_crates/platforms/axplat-x86-pc" }
+

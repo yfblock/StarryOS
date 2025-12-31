@@ -44,6 +44,7 @@ pub fn new_user_task(
             let thr = curr.as_thread();
             while !thr.pending_exit() {
                 let reason = uctx.run();
+                // log::warn!("peding reason: {:?}", reason);
 
                 set_timer_state(&curr, TimerState::Kernel);
 
@@ -62,6 +63,7 @@ pub fn new_user_task(
                     ReturnReason::Interrupt => {}
                     #[allow(unused_labels)]
                     ReturnReason::Exception(exc_info) => 'exc: {
+                        log::warn!("return raason exception: {:#x?}", exc_info);
                         // TODO: detailed handling
                         let signo = match exc_info.kind() {
                             ExceptionKind::Misaligned => {

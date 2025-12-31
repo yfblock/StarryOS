@@ -33,6 +33,7 @@ fn new_n_tty() -> Arc<NTtyDriver> {
             reader: Console,
             writer: Console,
             process_mode: if let Some(irq) = axhal::console::irq_num() {
+                log::warn!("register console irq_handler for console: {}", irq);
                 ProcessMode::External(Box::new(move |waker| register_irq_waker(irq, &waker)) as _)
             } else {
                 ProcessMode::Manual
