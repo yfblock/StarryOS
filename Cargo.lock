@@ -295,6 +295,7 @@ dependencies = [
  "axhal",
  "cfg-if",
  "crate_interface",
+ "gpt_disk_io",
  "log",
  "smallvec",
 ]
@@ -302,22 +303,23 @@ dependencies = [
 [[package]]
 name = "axdriver_base"
 version = "0.1.2"
-source = "git+https://github.com/arceos-org/axdriver_crates.git?tag=dev-v01#16f1ae864e1317f67d4e22a645fcb7399ae86596"
+source = "git+https://github.com/elliott10/axdriver_crates.git?rev=4d73e06a#4d73e06a0af27c5daf1a0d67864c2adf902e720b"
 
 [[package]]
 name = "axdriver_block"
 version = "0.1.2"
-source = "git+https://github.com/arceos-org/axdriver_crates.git?tag=dev-v01#16f1ae864e1317f67d4e22a645fcb7399ae86596"
+source = "git+https://github.com/elliott10/axdriver_crates.git?rev=4d73e06a#4d73e06a0af27c5daf1a0d67864c2adf902e720b"
 dependencies = [
  "axdriver_base",
  "log",
+ "sg200x-bsp 0.3.0 (git+https://github.com/yfblock/sg200x-bsp)",
  "simple-sdmmc",
 ]
 
 [[package]]
 name = "axdriver_display"
 version = "0.1.2"
-source = "git+https://github.com/arceos-org/axdriver_crates.git?tag=dev-v01#16f1ae864e1317f67d4e22a645fcb7399ae86596"
+source = "git+https://github.com/elliott10/axdriver_crates.git?rev=4d73e06a#4d73e06a0af27c5daf1a0d67864c2adf902e720b"
 dependencies = [
  "axdriver_base",
 ]
@@ -325,7 +327,7 @@ dependencies = [
 [[package]]
 name = "axdriver_input"
 version = "0.1.2"
-source = "git+https://github.com/arceos-org/axdriver_crates.git?tag=dev-v01#16f1ae864e1317f67d4e22a645fcb7399ae86596"
+source = "git+https://github.com/elliott10/axdriver_crates.git?rev=4d73e06a#4d73e06a0af27c5daf1a0d67864c2adf902e720b"
 dependencies = [
  "axdriver_base",
  "strum",
@@ -334,7 +336,7 @@ dependencies = [
 [[package]]
 name = "axdriver_net"
 version = "0.1.2"
-source = "git+https://github.com/arceos-org/axdriver_crates.git?tag=dev-v01#16f1ae864e1317f67d4e22a645fcb7399ae86596"
+source = "git+https://github.com/elliott10/axdriver_crates.git?rev=4d73e06a#4d73e06a0af27c5daf1a0d67864c2adf902e720b"
 dependencies = [
  "axdriver_base",
  "log",
@@ -344,7 +346,7 @@ dependencies = [
 [[package]]
 name = "axdriver_pci"
 version = "0.1.2"
-source = "git+https://github.com/arceos-org/axdriver_crates.git?tag=dev-v01#16f1ae864e1317f67d4e22a645fcb7399ae86596"
+source = "git+https://github.com/elliott10/axdriver_crates.git?rev=4d73e06a#4d73e06a0af27c5daf1a0d67864c2adf902e720b"
 dependencies = [
  "virtio-drivers",
 ]
@@ -352,7 +354,7 @@ dependencies = [
 [[package]]
 name = "axdriver_virtio"
 version = "0.1.2"
-source = "git+https://github.com/arceos-org/axdriver_crates.git?tag=dev-v01#16f1ae864e1317f67d4e22a645fcb7399ae86596"
+source = "git+https://github.com/elliott10/axdriver_crates.git?rev=4d73e06a#4d73e06a0af27c5daf1a0d67864c2adf902e720b"
 dependencies = [
  "axdriver_base",
  "axdriver_block",
@@ -367,7 +369,7 @@ dependencies = [
 [[package]]
 name = "axdriver_vsock"
 version = "0.1.2"
-source = "git+https://github.com/arceos-org/axdriver_crates.git?tag=dev-v01#16f1ae864e1317f67d4e22a645fcb7399ae86596"
+source = "git+https://github.com/elliott10/axdriver_crates.git?rev=4d73e06a#4d73e06a0af27c5daf1a0d67864c2adf902e720b"
 dependencies = [
  "axdriver_base",
  "log",
@@ -655,7 +657,6 @@ dependencies = [
 [[package]]
 name = "axplat-riscv64-sg2002"
 version = "0.1.0"
-source = "git+https://github.com/pengzechen/axplat-riscv64-sg2002.git?rev=a7f501572#a7f501572528a64df682a6124ee01da36a20635e"
 dependencies = [
  "axconfig-macros",
  "axcpu",
@@ -1054,6 +1055,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "crc"
+version = "3.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5eb8a2a1cd12ab0d987a5d5e825195d372001a4094a0376319d5a0ad71c1ba0d"
+dependencies = [
+ "crc-catalog",
+]
+
+[[package]]
+name = "crc-catalog"
+version = "2.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "19d374276b40fb8bbdee95aef7c7fa6b5316ec764510eb64b8dd0e2ed0d7e7f5"
+
+[[package]]
 name = "critical-section"
 version = "1.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1189,6 +1205,13 @@ name = "downcast-rs"
 version = "2.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "117240f60069e65410b3ae1bb213295bd828f707b5bec6596a1afc8793ce0cbc"
+
+[[package]]
+name = "dw_apb_uart"
+version = "0.1.0"
+dependencies = [
+ "tock-registers 0.8.1",
+]
 
 [[package]]
 name = "either"
@@ -1345,6 +1368,28 @@ name = "glob"
 version = "0.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0cc23270f6e1808e30a928bdc84dea0b9b4136a8bc82338574f23baf47bbd280"
+
+[[package]]
+name = "gpt_disk_io"
+version = "0.16.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cb194b955ba40423510e4342a077df49c70a599cf692cd0e30a86a32d8a9c7b1"
+dependencies = [
+ "bytemuck",
+ "gpt_disk_types",
+]
+
+[[package]]
+name = "gpt_disk_types"
+version = "0.16.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3972298dc4cef533492b66bdd75747133618917f44885a11dc8abd24c4e3f1f0"
+dependencies = [
+ "bytemuck",
+ "crc",
+ "ucs2",
+ "uguid",
+]
 
 [[package]]
 name = "handler_table"
@@ -2148,6 +2193,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "sg200x-bsp"
+version = "0.3.0"
+source = "git+https://github.com/yfblock/sg200x-bsp#67915999f9d5db6aeef952d478cdbeef9fa8400b"
+dependencies = [
+ "bit-struct",
+ "log",
+ "tock-registers 0.9.0",
+]
+
+[[package]]
 name = "shlex"
 version = "1.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2274,6 +2329,7 @@ dependencies = [
  "cfg-if",
  "chrono",
  "downcast-rs",
+ "dw_apb_uart",
  "event-listener",
  "flatten_objects",
  "gimli",
@@ -2290,7 +2346,7 @@ dependencies = [
  "ringbuf",
  "riscv",
  "scope-local",
- "sg200x-bsp",
+ "sg200x-bsp 0.3.0",
  "slab",
  "spin 0.10.0",
  "starry-core",
@@ -2298,6 +2354,7 @@ dependencies = [
  "starry-signal",
  "starry-vm",
  "syscalls",
+ "tock-registers 0.9.0",
  "x86",
  "zerocopy 0.8.33",
 ]
@@ -2537,6 +2594,24 @@ dependencies = [
  "bitflags 2.10.0",
  "rustversion",
  "x86",
+]
+
+[[package]]
+name = "ucs2"
+version = "0.3.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "df79298e11f316400c57ec268f3c2c29ac3c4d4777687955cd3d4f3a35ce7eba"
+dependencies = [
+ "bit_field",
+]
+
+[[package]]
+name = "uguid"
+version = "2.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0c8352f8c05e47892e7eaf13b34abd76a7f4aeaf817b716e88789381927f199c"
+dependencies = [
+ "bytemuck",
 ]
 
 [[package]]

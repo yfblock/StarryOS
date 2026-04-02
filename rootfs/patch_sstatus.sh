@@ -2,7 +2,7 @@
 set -e
 
 TARGET=$(find ~/.cargo/registry/src -type f \
-  -path "*riscv-*/src/register/sstatus.rs")
+  -path "*riscv-0.14.*/src/register/sstatus.rs")
 
 if [ -z "$TARGET" ]; then
   echo "❌ sstatus.rs not found"

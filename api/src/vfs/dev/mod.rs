@@ -1,32 +1,34 @@
 //! Special devices
 
+mod cvi_camera;
+mod devmem;
 #[cfg(feature = "input")]
 mod event;
 mod fb;
 pub mod ion;
 #[cfg(feature = "dev-log")]
 mod log;
-mod devmem;
-pub mod pwm;
 mod r#loop;
 #[cfg(feature = "memtrack")]
 mod memtrack;
+pub mod pwm;
 mod rtc;
-pub mod tty;
 pub mod tpu;
+pub mod tty;
+pub mod robo_ctl;
 
 use alloc::{format, sync::Arc};
 use core::any::Any;
 
 use axerrno::AxError;
 use axfs_ng_vfs::{DeviceId, Filesystem, NodeFlags, NodeType, VfsResult};
-use axsync::{Mutex};
-use spin::Once;
+use axsync::Mutex;
+use devmem::DevMem;
 #[cfg(feature = "dev-log")]
 pub use log::bind_dev_log;
 use rand::{RngCore, SeedableRng, rngs::SmallRng};
+use spin::Once;
 use starry_core::vfs::{Device, DeviceOps, DirMaker, DirMapping, SimpleDir, SimpleFs};
-use devmem::DevMem;
 
 pub static ION_DEVICE: Once<Arc<ion::IonDevice>> = Once::new();
 
@@ -148,7 +150,6 @@ impl DeviceOps for CpuDmaLatency {
         NodeFlags::NON_CACHEABLE
     }
 }
-
 
 fn builder(fs: Arc<SimpleFs>) -> DirMaker {
     let mut root = DirMapping::new();
@@ -310,6 +311,26 @@ fn builder(fs: Arc<SimpleFs>) -> DirMaker {
         ),
     );
 
+    root.add(
+        "cvi-camera",
+        Device::new(
+            fs.clone(),
+            NodeType::CharacterDevice,
+            DeviceId::new(10, 1026),
+            Arc::new(cvi_camera::CviCamera::new()),
+        ),
+    );
+
+    // root.add(
+    //     "robo-ctl",
+    //     Device::new(
+    //         fs.clone(),
+    //         NodeType::CharacterDevice,
+    //         DeviceId::new(10, 1027),
+    //         Arc::new(robo_ctl::RoboCtl::new()),
+    //     ),
+    // );
+
     // This is mounted to a tmpfs in `new_procfs`
     root.add(
         "shm",
@@ -336,8 +357,6 @@ fn builder(fs: Arc<SimpleFs>) -> DirMaker {
         "input",
         SimpleDir::new_maker(fs.clone(), Arc::new(event::input_devices(fs.clone()))),
     );
-
-
 
     SimpleDir::new_maker(fs, Arc::new(root))
 }
