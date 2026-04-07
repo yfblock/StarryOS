@@ -321,15 +321,15 @@ fn builder(fs: Arc<SimpleFs>) -> DirMaker {
         ),
     );
 
-    // root.add(
-    //     "robo-ctl",
-    //     Device::new(
-    //         fs.clone(),
-    //         NodeType::CharacterDevice,
-    //         DeviceId::new(10, 1027),
-    //         Arc::new(robo_ctl::RoboCtl::new()),
-    //     ),
-    // );
+    root.add(
+        "robo-ctl",
+        Device::new(
+            fs.clone(),
+            NodeType::CharacterDevice,
+            DeviceId::new(10, 1027),
+            Arc::new(robo_ctl::RoboCtl::new()),
+        ),
+    );
 
     // This is mounted to a tmpfs in `new_procfs`
     root.add(

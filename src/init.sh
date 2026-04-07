@@ -12,4 +12,8 @@ echo
 # Do your initialization here!
 
 cd ~
-sh --login
+# /bin/test-roboctl
+# /tennis run /data
+# /tennis run /data/tennis_cv181x_bf16.cvimodel
+/tennis follow /data/tennis_cv181x_bf16.cvimodel
+# sh --login

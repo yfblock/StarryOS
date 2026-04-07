@@ -142,7 +142,9 @@ optional = true
 version = "0.1"
 # git = "https://github.com/pengzechen/axplat-riscv64-sg2002.git"
 # rev = "a7f501572"
-path = "./axplat-riscv64-sg2002-peng/"
+# path = "./axplat-riscv64-sg2002-peng/"
+git = "https://github.com/yfblock/axplat-riscv64-sg2002-1.git"
+rev = "2ca6b28"
 features = ["fp-simd", "irq", "rtc"]
 optional = true
 
